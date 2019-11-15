@@ -6,7 +6,7 @@
 
     <groupId>com.datascouting.processing.image</groupId>
     <artifactId>graphics-magick</artifactId>
-    <version>1-SNAPSHOT</version>
+    <version>1</version>
 
     <properties>
         <buildNumber/>
