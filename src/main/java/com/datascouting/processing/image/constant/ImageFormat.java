@@ -3,5 +3,12 @@ package com.datascouting.processing.image.constant;
 /**
  * @author Chrisostomos Bakouras
  */
-public class ImageFormat {
+public enum ImageFormat {
+    BMP,
+    GIF,
+    ICO,
+    JPEG,
+    PNG,
+    TIFF,
+    WEBP,
 }
