@@ -1,0 +1,62 @@
+@Library('utilities') _
+node {
+    properties([
+            disableConcurrentBuilds(),
+            discardBuilds(days: 7, num: 7)
+    ])
+    def hasError = null
+    try {
+        try {
+            when(hasError == null) {
+                simpleCheckout(
+                        shouldReset: true,
+                        timeout: 30,
+                        shallow: false,
+                        fetchTags: false
+                )
+            }
+        } catch (Exception e) {
+            hasError = e
+        }
+        try {
+            when(hasError == null) {
+                simpleBuild(forceUpdates: true)
+            }
+        } catch (Exception e) {
+            hasError = e
+        }
+        try {
+            when(hasError == null) {
+                aggregateTest(skipStage: false)
+            }
+        } catch (Exception e) {
+            hasError = e
+        }
+        try {
+            when(hasError == null) {
+                simplePackage(shouldSkipTests: true, forceUpdates: true)
+            }
+        } catch (Exception e) {
+            hasError = e
+        }
+        try {
+            when(hasError == null) {
+                simpleArchive(
+                        skipVersion: false,
+                        exclusion: "",
+                        buildNumber: env.BRANCH_NAME,
+                        buildUrl: env.BUILD_URL
+                )
+            }
+        } catch (Exception e) {
+            hasError = e
+        }
+    } catch (Exception e) {
+        hasError = e
+    } finally {
+        logRun(branchName: env.BRANCH_NAME)
+        if (hasError != null) {
+            throw hasError
+        }
+    }
+}

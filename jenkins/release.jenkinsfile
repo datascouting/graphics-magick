@@ -1,0 +1,34 @@
+@Library('utilities') _
+node {
+    properties([
+            disableConcurrentBuilds(),
+            discardBuilds(days: 60, num: 20),
+            defaultReleaseParameters()])
+    Integer version = 0
+    simpleCheckout(
+            shouldReset: true,
+            timeout: 30,
+            shallow: false,
+            fetchTags: false,
+            checkoutBranch: env.BRANCH_NAME
+    )
+    simpleBuild(forceUpdates: true)
+    aggregateTest(skipStage: (env.RUN_TEST && RUN_TEST == "false"))
+    version = simpleRevision(branch: env.BRANCH_NAME)
+    simplePackage(
+            shouldSkipTests: true,
+            shouldUpdate: true
+    )
+    simpleArchive(
+            profile: "artifactory",
+            skipTests: true,
+            bumpVersion: true,
+            exclusion: "",
+            isSnapShot: false,
+            extractVersion: false,
+            buildNumber: version,
+            buildUrl: env.BUILD_URL
+    )
+    simplePush(version: version)
+    logRun(branchName: env.BRANCH_NAME)
+}
