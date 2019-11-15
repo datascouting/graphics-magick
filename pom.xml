@@ -93,4 +93,5 @@
             <url>http://jcenter.bintray.com</url>
         </pluginRepository>
     </pluginRepositories>
+
 </project>
