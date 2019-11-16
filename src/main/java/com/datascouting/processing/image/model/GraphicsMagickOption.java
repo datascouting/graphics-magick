@@ -636,4 +636,138 @@ public class GraphicsMagickOption {
                                             final Integer height) {
         return new GraphicsMagickOption("-size " + width+ 'x' + height);
     }
+
+    public static GraphicsMagickOption solarize(final Integer factor) {
+        return new GraphicsMagickOption("-solarize " + factor);
+    }
+
+    public static GraphicsMagickOption spread(final String amount) {
+        return new GraphicsMagickOption("-spread " + amount);
+    }
+
+    public static GraphicsMagickOption strip() {
+        return new GraphicsMagickOption("-strip");
+    }
+
+    public static GraphicsMagickOption stroke(final String color) {
+        return new GraphicsMagickOption("-stroke " + color);
+    }
+
+    public static GraphicsMagickOption strokeWidth(final String value) {
+        return new GraphicsMagickOption("-strokewidth " + value);
+    }
+
+    public static GraphicsMagickOption swirl(final String degrees) {
+        return new GraphicsMagickOption("-swirl " + degrees);
+    }
+
+    public static GraphicsMagickOption texture(final String filename) {
+        return new GraphicsMagickOption("-texture " + filename);
+    }
+
+    public static GraphicsMagickOption threshold(final String value, final Boolean percent) {
+        return new GraphicsMagickOption("-threshold " + value + (percent ? "%" : ""));
+    }
+
+    public static GraphicsMagickOption thumbnail(final Integer width,
+                                                 final Integer height) {
+        return new GraphicsMagickOption("-thumbnail " + width + "x" + height);
+    }
+
+    public static GraphicsMagickOption tile(final String filename) {
+        return new GraphicsMagickOption("-tile " + filename);
+    }
+
+    public static GraphicsMagickOption transform() {
+        return new GraphicsMagickOption("-transform");
+    }
+
+    public static GraphicsMagickOption transparent(final String color) {
+        return new GraphicsMagickOption("-transform " + color);
+    }
+
+    public static GraphicsMagickOption treeDepth(final String value) {
+        return new GraphicsMagickOption("-treedepth " + value);
+    }
+
+    public static GraphicsMagickOption trim() {
+        return new GraphicsMagickOption("-trim");
+    }
+
+    public static GraphicsMagickOption type(final String type) {
+        return new GraphicsMagickOption("-type " + type);
+    }
+
+    public static GraphicsMagickOption units(final String type) {
+        return new GraphicsMagickOption("-units " + type);
+    }
+
+    public static GraphicsMagickOption unSharp(final String radius) {
+        return new GraphicsMagickOption("-unsharp " + radius);
+    }
+
+    public static GraphicsMagickOption unSharp(final String radius,
+                                               final String sigma) {
+        return new GraphicsMagickOption("-unsharp " + radius + "x" + sigma);
+    }
+
+    public static GraphicsMagickOption unSharp(final String radius,
+                                               final String sigma,
+                                               final String amount) {
+        return new GraphicsMagickOption(
+                "-unsharp " + radius + "x" + sigma + "+" + amount
+        );
+    }
+
+    public static GraphicsMagickOption unSharp(final String radius,
+                                               final String sigma,
+                                               final String amount,
+                                               final String threshold) {
+        return new GraphicsMagickOption(
+                "-unsharp " + radius + "x" + sigma + "+" + amount + "+" + threshold
+        );
+    }
+
+    public static GraphicsMagickOption usePixmap() {
+        return new GraphicsMagickOption("-use-pixmap");
+    }
+
+    public static GraphicsMagickOption verbose() {
+        return new GraphicsMagickOption("-verbose");
+    }
+
+    public static GraphicsMagickOption version() {
+        return new GraphicsMagickOption("-version");
+    }
+
+    public static GraphicsMagickOption view(final String value) {
+        return new GraphicsMagickOption("-view " + value);
+    }
+
+    public static GraphicsMagickOption virtualPixel(final String method) {
+        return new GraphicsMagickOption("-virtual-pixel " + method);
+    }
+
+    public static GraphicsMagickOption wave(final String amplitude,
+                                            final String waveLength) {
+        return new GraphicsMagickOption("-wave " + amplitude + "x" + waveLength);
+    }
+
+    public static GraphicsMagickOption whitePoint(final int x,
+                                                  final int y) {
+        return new GraphicsMagickOption("-white-point " + x + "," + y);
+    }
+
+    public static GraphicsMagickOption whiteThreshold(final String red,
+                                                      final String green,
+                                                      final String blue,
+                                                      final String opacity) {
+        return new GraphicsMagickOption(
+                "-white-threshold " + join(",", red, green, blue, opacity)
+        );
+    }
+
+    public static GraphicsMagickOption write(final String filename) {
+        return new GraphicsMagickOption("-write " + filename);
+    }
 }

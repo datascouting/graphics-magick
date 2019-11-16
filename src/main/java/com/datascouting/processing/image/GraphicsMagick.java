@@ -1,5 +1,6 @@
 package com.datascouting.processing.image;
 
+import com.datascouting.processing.image.constant.Command;
 import com.datascouting.processing.image.constant.Defaults;
 import com.datascouting.processing.image.model.GraphicsMagickOption;
 import io.vavr.collection.List;
@@ -47,6 +48,7 @@ public class GraphicsMagick {
         return Try.of(() -> String
                 .join(DELIMITER,
                         binary.toString(),
+                        Command.CONVERT.toString(),
                         String.join(DELIMITER, inputOptions.map(GraphicsMagickOption::getValue)),
                         input.getAbsolutePath(),
                         String.join(DELIMITER, outputOptions.map(GraphicsMagickOption::getValue)),

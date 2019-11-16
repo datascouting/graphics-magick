@@ -17,5 +17,11 @@ public enum Command {
     MOGRIFY,
     MONTAGE,
     TIME,
-    VERSION,
+    VERSION;
+
+    @Override
+    public String toString() {
+        return this.name()
+                .toLowerCase();
+    }
 }
