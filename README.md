@@ -8,7 +8,7 @@ These instructions will guide you on how to use this library.
 
 ### Prerequisites
 
-* Install [GraphicsMagic](http://www.graphicsmagick.org/download.html)
+* Install [GraphicsMagicκ](http://www.graphicsmagick.org/download.html)
 * GraphicsMagic not natively supports some formats. Refer to this [list](http://www.graphicsmagick.org/formats.html). In order to support more formats you must install the required software.
 
 ### Installing
