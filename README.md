@@ -1,6 +1,6 @@
 # graphics-magick
 
-graphics-magick is a java wrapper for GraphicsMagick's a powerful command line utility gm, which may be used to access all GraphicsMagick functions.
+graphics-magick is a java wrapper for GraphicsMagick's a powerful command-line utility gm, which may be used to access all GraphicsMagick functions.
 
 ## Getting Started
 
@@ -8,8 +8,8 @@ These instructions will guide you on how to use this library.
 
 ### Prerequisites
 
-* Install [GraphicsMagicκ](http://www.graphicsmagick.org/download.html)
-* GraphicsMagic not natively supports some formats. Refer to this [list](http://www.graphicsmagick.org/formats.html). In order to support more formats you must install the required software.
+* Install [GraphicsMagick](http://www.graphicsmagick.org/download.html)
+* GraphicsMagic not natively supports some formats. Refer to this [list](http://www.graphicsmagick.org/formats.html). To support more formats, you must install the required software.
 
 ### Installing
 
@@ -36,10 +36,10 @@ final Path binary = Paths.get("/usr/bin/gm");
 final GraphicsMagick gm = new GraphicsMagick(binary);
 ```
 
-Note that the empty constructor will use the default installation path of GraphicsMagick in linux (/usr/bin/gm).
+Note that the empty constructor will use the default installation path of GraphicsMagick in Linux (`/usr/bin/gm`).
 If you wish to use another binary please use the path constructor with the proper binary. `e.g. C:\Program Files\GraphicsMagick\gm.exe` 
 
-After initialization you can use GraphicsMagick sub-commands. 
+After initialization, you can use GraphicsMagick sub-commands. 
 
 Note that currently only convert sub-command is supported.
 
