@@ -29,11 +29,11 @@ public class GraphicsMagick {
     private final Path binary;
 
     public GraphicsMagick() {
-        this.binary = Defaults.graphicsMagickBinaryPath;
+        this.binary = Defaults.GraphicsMagickBinaryPath;
     }
 
     public GraphicsMagick(Path binary) {
-        this.binary = Option.of(binary).getOrElse(Defaults.graphicsMagickBinaryPath);
+        this.binary = Option.of(binary).getOrElse(Defaults.GraphicsMagickBinaryPath);
     }
 
     public Try<File> convert(final List<GraphicsMagickOption> inputOptions,
@@ -61,16 +61,11 @@ public class GraphicsMagick {
     private static Try<Void> execute(final String command) {
         requireNonNull(command, "command is null");
 
-        return execute(new String[]{"/usr/bin/env", "bash", "-c", command});
-    }
-
-    private static Try<Void> execute(final String[] command) {
-        requireNonNull(command, "command is null");
-
         logger.debug(String.join(" ", command));
 
         return Try.run(() -> {
-            final Process process = new ProcessBuilder(command).start();
+            final Process process = Runtime.getRuntime()
+                    .exec(command);
 
             final String errOutput = new BufferedReader(new InputStreamReader(process.getErrorStream()))
                     .lines()
@@ -80,5 +75,9 @@ public class GraphicsMagick {
 
             if (exitCode != 0) throw new RuntimeException("Error: " + errOutput);
         });
+    }
+
+    public Path getBinary() {
+        return binary;
     }
 }

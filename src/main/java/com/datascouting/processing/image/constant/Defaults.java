@@ -8,5 +8,5 @@ import java.nio.file.Paths;
  */
 public abstract class Defaults {
 
-    public static final Path graphicsMagickBinaryPath = Paths.get("/usr/bin/gm");
+    public static final Path GraphicsMagickBinaryPath = Paths.get("/usr/bin/gm");
 }
