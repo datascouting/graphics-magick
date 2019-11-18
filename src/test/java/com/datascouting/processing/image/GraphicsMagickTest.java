@@ -6,6 +6,7 @@ import com.datascouting.processing.image.utils.TestResourceLoader;
 import io.vavr.collection.List;
 import io.vavr.control.Try;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -66,6 +67,7 @@ public class GraphicsMagickTest {
     }
 
     @Test
+    @Ignore
     public void testConvertUnix() throws IOException {
         assumeFalse(System.getProperty("os.name").toLowerCase().startsWith("win"));
 
