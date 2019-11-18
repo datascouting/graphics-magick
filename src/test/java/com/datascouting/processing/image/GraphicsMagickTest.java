@@ -16,9 +16,12 @@ import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
 
 /**
  * @author Chrisostomos Bakouras
+ * @author Michailidis Michael
  */
 public class GraphicsMagickTest {
 
@@ -43,8 +46,30 @@ public class GraphicsMagickTest {
     }
 
     @Test
-    public void testConvert() throws IOException {
+    public void testConvertWindows() throws IOException {
+        assumeTrue(System.getProperty("os.name").toLowerCase().startsWith("win"));
+
         final GraphicsMagick gm = new GraphicsMagick(binary);
+
+        final Try<File> convert = gm.convert(
+                List.of(GraphicsMagickOption.thumbnail(50, 7)),
+                this.testImage.toFile(),
+                List.empty(),
+                this.testResultFile
+        );
+
+        assertTrue(convert.isSuccess());
+
+        final File file = convert.get();
+
+        assertTrue(file.exists());
+    }
+
+    @Test
+    public void testConvertUnix() throws IOException {
+        assumeFalse(System.getProperty("os.name").toLowerCase().startsWith("win"));
+
+        final GraphicsMagick gm = new GraphicsMagick();
 
         final Try<File> convert = gm.convert(
                 List.of(GraphicsMagickOption.thumbnail(50, 7)),

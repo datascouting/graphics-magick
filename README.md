@@ -19,7 +19,7 @@ Add the dependency into your pom.xml
 <dependency>
     <groupId>com.datascouting.processing.image</groupId>
     <artifactId>graphics-magick</artifactId>
-    <version>1</version>
+    <version>2</version>
 </dependency>
 ```
 
