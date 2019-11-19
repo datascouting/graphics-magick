@@ -21,9 +21,14 @@ public class TestResourceLoader {
 
     public static final String CONFIGURATION_NAME = "configuration.yml";
     public static final String TEST_IMAGE = "logo.png";
+    public static final String TEST_PDF = "dummy.pdf";
 
     public Try<Path> getTestImagePath() {
         return getResourcePath(TEST_IMAGE);
+    }
+
+    public Try<Path> getTestPdfPath() {
+        return getResourcePath(TEST_PDF);
     }
 
     public Try<TestConfiguration> getConfiguration() {

@@ -58,6 +58,30 @@ public class GraphicsMagick {
                 .map(ignored -> output);
     }
 
+    public Try<File> convertPdfPage(final List<GraphicsMagickOption> inputOptions,
+                                    final File input,
+                                    final Integer pageNumber,
+                                    final List<GraphicsMagickOption> outputOptions,
+                                    final File output) {
+        requireNonNull(inputOptions, "inputOptions is null");
+        requireNonNull(input, "input is null");
+        requireNonNull(pageNumber, "pageNumber is null");
+        requireNonNull(outputOptions, "outputOptions is null");
+        requireNonNull(output, "output is null");
+
+        return Try.of(() -> String
+                .join(DELIMITER,
+                        binary.toString(),
+                        Command.CONVERT.toString(),
+                        String.join(DELIMITER, inputOptions.map(GraphicsMagickOption::getValue)),
+                        input.getAbsolutePath() + "[" + pageNumber + "]",
+                        String.join(DELIMITER, outputOptions.map(GraphicsMagickOption::getValue)),
+                        output.getAbsolutePath()
+                ))
+                .flatMap(GraphicsMagick::execute)
+                .map(ignored -> output);
+    }
+
     private static Try<Void> execute(final String command) {
         requireNonNull(command, "command is null");
 

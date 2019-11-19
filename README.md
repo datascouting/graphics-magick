@@ -13,13 +13,23 @@ These instructions will guide you on how to use this library.
 
 ### Installing
 
-Add the dependency into your pom.xml
+Add the JitPack repository to your build file
+```
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+Add the dependency
 
 ```
 <dependency>
-    <groupId>com.datascouting.processing.image</groupId>
+    <groupId>com.github.datascouting</groupId>
     <artifactId>graphics-magick</artifactId>
-    <version>2</version>
+    <version>v1</version>
 </dependency>
 ```
 

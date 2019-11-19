@@ -28,6 +28,7 @@ public class GraphicsMagickTest {
 
     private Path binary;
     private Path testImage;
+    private Path testPdf;
     private File testResultFile;
 
     @Before
@@ -40,6 +41,10 @@ public class GraphicsMagickTest {
 
         this.testImage = testResourceLoader
                 .getTestImagePath()
+                .getOrElseThrow((Function<Throwable, RuntimeException>) RuntimeException::new);
+
+        this.testPdf = testResourceLoader
+                .getTestPdfPath()
                 .getOrElseThrow((Function<Throwable, RuntimeException>) RuntimeException::new);
 
         this.testResultFile = File.createTempFile("test", ".png");
@@ -76,6 +81,49 @@ public class GraphicsMagickTest {
         final Try<File> convert = gm.convert(
                 List.of(GraphicsMagickOption.thumbnail(50, 7)),
                 this.testImage.toFile(),
+                List.empty(),
+                this.testResultFile
+        );
+
+        assertTrue(convert.isSuccess());
+
+        final File file = convert.get();
+
+        assertTrue(file.exists());
+    }
+
+    @Test
+    public void testConvertPdfPageWindows() throws IOException {
+        assumeTrue(System.getProperty("os.name").toLowerCase().startsWith("win"));
+
+        final GraphicsMagick gm = new GraphicsMagick(binary);
+
+        final Try<File> convert = gm.convertPdfPage(
+                List.of(GraphicsMagickOption.thumbnail(50, 7)),
+                this.testPdf.toFile(),
+                2,
+                List.empty(),
+                this.testResultFile
+        );
+
+        assertTrue(convert.isSuccess());
+
+        final File file = convert.get();
+
+        assertTrue(file.exists());
+    }
+
+    @Test
+    @Ignore
+    public void testConvertPdfPageUnix() throws IOException {
+        assumeFalse(System.getProperty("os.name").toLowerCase().startsWith("win"));
+
+        final GraphicsMagick gm = new GraphicsMagick();
+
+        final Try<File> convert = gm.convertPdfPage(
+                List.of(GraphicsMagickOption.thumbnail(50, 7)),
+                this.testPdf.toFile(),
+                2,
                 List.empty(),
                 this.testResultFile
         );
