@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import static java.lang.String.join;
+import static java.util.Objects.requireNonNull;
 
 /**
  * @author Chrisostomos Bakouras
@@ -16,6 +17,12 @@ public class GraphicsMagickOption {
 
     public static GraphicsMagickOption adjoin() {
         return new GraphicsMagickOption("-adjoin");
+    }
+
+    public static GraphicsMagickOption adjoin(final Boolean forceMultipleFiles) {
+        requireNonNull(forceMultipleFiles);
+
+        return new GraphicsMagickOption((forceMultipleFiles ? "+" : "-") + "adjoin");
     }
 
     public static GraphicsMagickOption affine(final String matrix) {
@@ -634,7 +641,7 @@ public class GraphicsMagickOption {
 
     public static GraphicsMagickOption size(final Integer width,
                                             final Integer height) {
-        return new GraphicsMagickOption("-size " + width+ 'x' + height);
+        return new GraphicsMagickOption("-size " + width + 'x' + height);
     }
 
     public static GraphicsMagickOption solarize(final Integer factor) {

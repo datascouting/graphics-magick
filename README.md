@@ -29,7 +29,7 @@ Add the dependency
 <dependency>
     <groupId>com.github.datascouting</groupId>
     <artifactId>graphics-magick</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
 </dependency>
 ```
 
