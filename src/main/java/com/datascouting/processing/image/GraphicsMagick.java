@@ -82,12 +82,27 @@ public class GraphicsMagick {
                 .map(ignored -> output);
     }
 
-    private static Try<Void> execute(final String command) {
+    public Try<String> identify(final List<GraphicsMagickOption> inputOptions,
+                              final File input) {
+        requireNonNull(inputOptions, "inputOptions is null");
+        requireNonNull(input, "input is null");
+
+        return Try.of(() -> String
+                .join(DELIMITER,
+                        binary.toString(),
+                        Command.IDENTIFY.toString(),
+                        String.join(DELIMITER, inputOptions.map(GraphicsMagickOption::getValue)),
+                        input.getAbsolutePath()
+                ))
+                .flatMap(GraphicsMagick::execute);
+    }
+
+    private static Try<String> execute(final String command) {
         requireNonNull(command, "command is null");
 
         logger.debug(String.join(" ", command));
 
-        return Try.run(() -> {
+        return Try.of(() -> {
             final Process process = Runtime.getRuntime()
                     .exec(command);
 
@@ -95,9 +110,15 @@ public class GraphicsMagick {
                     .lines()
                     .collect(Collectors.joining("\n"));
 
+            final String output = new BufferedReader(new InputStreamReader(process.getInputStream()))
+                    .lines()
+                    .collect(Collectors.joining("\n"));
+
             final int exitCode = process.waitFor();
 
             if (exitCode != 0) throw new RuntimeException("Error: " + errOutput);
+
+            return output;
         });
     }
 

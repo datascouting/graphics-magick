@@ -151,4 +151,39 @@ public class GraphicsMagickTest {
 
         assertEquals(expected, binary);
     }
+
+    @Test
+    @Ignore
+    public void testIdentifyUnix() throws IOException {
+        assumeFalse(System.getProperty("os.name").toLowerCase().startsWith("win"));
+
+        final GraphicsMagick gm = new GraphicsMagick(binary);
+
+        final Try<String> identify = gm.identify(
+                List.of(GraphicsMagickOption.format("%p")),
+                this.testImage.toFile()
+        );
+
+        assertTrue(identify.isSuccess());
+
+        final String result = identify.get();
+        assertEquals("1", result);
+    }
+
+    @Test
+    public void testIdentifyWindows() throws IOException {
+        assumeTrue(System.getProperty("os.name").toLowerCase().startsWith("win"));
+
+        final GraphicsMagick gm = new GraphicsMagick(binary);
+
+        final Try<String> identify = gm.identify(
+                List.of(GraphicsMagickOption.format("%p")),
+                this.testImage.toFile()
+        );
+
+        assertTrue(identify.isSuccess());
+
+        final String result = identify.get();
+        assertEquals("1", result);
+    }
 }
